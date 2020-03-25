@@ -15,5 +15,11 @@ jobs:
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-      - name: CIBuild
-        run: script/cibuild
+      - name: Run Jekyll
+        run: script/run_jekyll.sh
+      - name: Validate JSON
+        run: script/validate_json.rb
+      - name: Ping Websites
+        run: script/ping_websites.rb
+      - name: Check Files Formatting
+        run: script/check_files_formatting.sh
