@@ -4,13 +4,16 @@ rvm:
 
 # Assume bundler is being used, therefore
 # the `install` step will run `bundle install` by default.
--stage: Run Jekyll
-  script: ./script/run_jekyll.sh
--stage: Validate JSON
-  script: ./script/validate_json.rb
--stage: Ping Websites
-  script: ./script/ping_websites.rb
--stage: Check Files Formatting
-  script: ./script/check_files_formatting.sh
+
+jobs:
+  include:
+    - stage: run jekyll
+      script: ./script/run_jekyll.sh
+    - stage: validate json
+      script: ./script/validate_json.rb
+    - stage: ping websites
+      script: ./script/ping_websites.rb
+    - stage: check files formatting
+      script: ./script/check_files_formatting.sh
 
 sudo: false
