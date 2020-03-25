@@ -1,23 +1,24 @@
-name: Ruby
+name: Validate Commit
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master, gh-workflow ]
+on: [push, pull_request]
+
+env:
+  NOKOGIRI_USE_SYSTEM_LIBRARIES: true
 
 jobs:
-  build:
+  Test and build:
+    name: Test and build
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.x
-    - name: Build and test with Rake
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        ./script/cibuild
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+      - name: Install Dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: CIBuild
+        run: script/cibuild
