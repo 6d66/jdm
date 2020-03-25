@@ -7,7 +7,7 @@ jobs:
     - stage: Install Dependencies
       script:
         - gem install bundler
-        - bundle install --jobs 3 --retry 3 --deployment
+        - bundle install --jobs 3 --retry 3
     - stage: run jekyll
       script: ./script/run_jekyll.sh
     - stage: validate json
